@@ -1,47 +1,62 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('content')
+    <div id="container" class="container">
+        <!-- container-->
+        <div class="d-flex justify-content-center h-100">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div id="card" class="card">
+                <!--card-->
+
+                <div id="card-header" class="card-header">
+                    <!--card-header-->
+                    <h3>Đăng nhập</h3>
+                    <div class="d-flex justify-content-end social_icon"></div>
+                </div> <!-- end card-header-->
+
+                <div id="card-body" class="card-body">
+                    <!--card-body-->
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div id="body__group-username" class="input-group form-group">
+                            <!--body__group-username-->
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="email" id="email" class="form-control"
+                                placeholder="Tên đăng nhập" required>
+                        </div> <!-- username-->
+
+                        <div id="body__group-password" class="input-group form-group">
+                            <!--body__group-password-->
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Mật khẩu" required>
+                        </div> <!-- password-->
+
+                        <div id="body__remember" class="row align-items-center remember">
+                            <input type="checkbox">Nhớ tài khoản
+                        </div> <!-- body__remember -->
+
+                        <div id="body__btn" class="form-group">
+                            <input type="submit" class="btn float-right login_btn">
+                        </div> <!-- body__btn -->
+                    </form>
+                </div> <!-- end card-body -->
+
+                <div id="card-footer" class="card-footer">
+                    <!-- card-footer -->
+                    <div class="d-flex justify-content-center links">
+                        Chưa có tài khoản?<a href="signIn.html" class="footer--color">Đăng kí</a>
+                    </div> <!-- sign in-->
+
+                    <div class="d-flex justify-content-center">
+                        <a href="forgot.html" class="footer--color">Quên mật khẩu?</a>
+                    </div> <!-- forgot pass-->
+                </div> <!-- end card-footer-->
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection
